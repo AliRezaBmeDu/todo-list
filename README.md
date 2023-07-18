@@ -118,7 +118,10 @@ To run the project, execute the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ]
+- [ ]**Checkbox function to mark a task completed**
+- [ ]**Clear list functionalities**
+- [ ]**Interactive list**
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
