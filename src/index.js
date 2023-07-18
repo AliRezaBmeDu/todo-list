@@ -44,6 +44,11 @@ const addTask = (description, index) => {
 
   singleTask.appendChild(checkbox);
   singleTask.appendChild(taskDescription);
+
+  const threeDotIcon = document.createElement('i');
+  threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');
+  threeDotIcon.classList.add(`${task.index}-threedot`);
+  singleTask.appendChild(threeDotIcon);
   listDiv.appendChild(singleTask);
 };
 
