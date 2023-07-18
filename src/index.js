@@ -1,21 +1,20 @@
-import _ from 'lodash';
 import './style.css';
 
 const todoTasks = [
   {
-    description: "Read the documentation",
+    description: 'Read the documentation',
     completed: false,
-    index: 1
+    index: 1,
   },
   {
-    description: "Create the Repository",
+    description: 'Create the Repository',
     completed: false,
-    index: 2
+    index: 2,
   },
   {
-    description: "Set the Linters",
+    description: 'Set the Linters',
     completed: false,
-    index: 3
+    index: 3,
   },
 ];
 
@@ -26,7 +25,7 @@ const addTask = (description, index) => {
   const task = {
     description,
     completed: false,
-    index
+    index,
   };
 
   todoTasks.push(task);
