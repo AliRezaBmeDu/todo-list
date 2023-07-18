@@ -1,6 +1,7 @@
 body {
-    background-color: rgb(218, 213, 213);
+  background-color: rgb(218, 213, 213);
 }
+
 /* General styling for all elements */
 .todo-head,
 .input-div,
@@ -15,10 +16,10 @@ body {
 
 /* General styling for the container */
 #todo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* 'todo-head' styles */
 .todo-head {
@@ -60,43 +61,43 @@ input::placeholder {
 
 /* Styling for the todo list */
 #list {
-    list-style: none;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    position: relative;
-    left: -1.2rem;
-  }
-  
-  .single-task {
-    display: flex;
-    align-items: center;
-    margin-top: 0.2rem;
-    width: 100%;
-    font-size: 1rem;
-    height: 2.6rem;
-    padding-inline: 8px;
-  }
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  position: relative;
+  left: -1.2rem;
+}
 
-  .single-task p {
-    font-size: 1.1rem;
-  }
-  
-  .single-task input[type="checkbox"] {
-    margin-right: 20px;
-    align-self: flex-start;
-    margin-top: 0.7rem;
-  }
-  
-  .single-task .dot-icon {
-    margin-left: auto;
-    align-self: flex-end;
-    height: 0.5rem;
-    position: relative;
-    top: -1rem
-  }
+.single-task {
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+  width: 100%;
+  font-size: 1rem;
+  height: 2.6rem;
+  padding-inline: 8px;
+}
+
+.single-task p {
+  font-size: 1.1rem;
+}
+
+.single-task input[type="checkbox"] {
+  margin-right: 20px;
+  align-self: flex-start;
+  margin-top: 0.7rem;
+}
+
+.single-task .dot-icon {
+  margin-left: auto;
+  align-self: flex-end;
+  height: 0.5rem;
+  position: relative;
+  top: -1rem;
+}
 
 /* 'clear-completed' styles */
 #clear-completed {
@@ -108,5 +109,5 @@ input::placeholder {
   width: 50%;
   text-align: center;
   height: 2rem;
-  padding-top: 1rem
+  padding-top: 1rem;
 }
