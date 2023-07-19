@@ -1,9 +1,13 @@
 // addremove.js
 
-import todoTasks from "./taskDB";
+import todoTasks from './taskDB';
 
 const listDiv = document.getElementById('list');
 const LOCAL_STORAGE_KEY = 'todoTasks';
+
+export const saveToLocalStorage = () => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoTasks));
+};
 
 export const addTask = (detail, idx, status) => {
   const task = {
@@ -59,39 +63,11 @@ export const deleteTask = (indexes) => {
   });
 
   // Update indexes of remaining tasks
-  for (let i = 0; i < todoTasks.length; i++) {
+  for (let i = 0; i < todoTasks.length; i += 1) {
     todoTasks[i].index = i + 1;
   }
 
   saveToLocalStorage();
-};
-
-export const toggleEditMode = (taskElement, index) => {
-  const threeDotIcon = taskElement.querySelector('.dot-icon');
-  const deleteIcon = document.createElement('i');
-  deleteIcon.classList.add('fas', 'fa-trash', 'delete-icon');
-  deleteIcon.setAttribute('data-action', 'delete');
-
-  const taskDescription = taskElement.querySelector('p');
-  const currentDescription = taskDescription.innerText;
-
-  taskDescription.remove(); // Remove the task description
-  const inputField = document.createElement('input');
-  inputField.type = 'text';
-  inputField.className= 'edit-input'
-  inputField.value = currentDescription;
-  taskElement.appendChild(inputField); // Add the input field
-
-  threeDotIcon.remove(); // Remove the three-dot icon
-  taskElement.appendChild(deleteIcon); // Add the delete icon
-
-  inputField.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' && inputField.value.trim() !== '') {
-      const newDescription = inputField.value.trim();
-      editTaskDescription(index, newDescription);
-      toggleViewMode(taskElement, index, newDescription); // Toggle back to view mode
-    }
-  });
 };
 
 export const toggleViewMode = (taskElement, index, description) => {
@@ -120,6 +96,30 @@ export const editTaskDescription = (index, newDescription) => {
   saveToLocalStorage();
 };
 
-export const saveToLocalStorage = () => {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoTasks));
+export const toggleEditMode = (taskElement, index) => {
+  const threeDotIcon = taskElement.querySelector('.dot-icon');
+  const deleteIcon = document.createElement('i');
+  deleteIcon.classList.add('fas', 'fa-trash', 'delete-icon');
+  deleteIcon.setAttribute('data-action', 'delete');
+
+  const taskDescription = taskElement.querySelector('p');
+  const currentDescription = taskDescription.innerText;
+
+  taskDescription.remove(); // Remove the task description
+  const inputField = document.createElement('input');
+  inputField.type = 'text';
+  inputField.className = 'edit-input';
+  inputField.value = currentDescription;
+  taskElement.appendChild(inputField); // Add the input field
+
+  threeDotIcon.remove(); // Remove the three-dot icon
+  taskElement.appendChild(deleteIcon); // Add the delete icon
+
+  inputField.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && inputField.value.trim() !== '') {
+      const newDescription = inputField.value.trim();
+      editTaskDescription(index, newDescription);
+      toggleViewMode(taskElement, index, newDescription); // Toggle back to view mode
+    }
+  });
 };

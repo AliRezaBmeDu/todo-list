@@ -97,7 +97,8 @@ input::placeholder {
   margin-top: 0.7rem;
 }
 
-.single-task .dot-icon,.delete-icon {
+.single-task .dot-icon,
+.delete-icon {
   margin-left: auto;
   align-self: flex-end;
   height: 0.5rem;

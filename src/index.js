@@ -1,6 +1,12 @@
 import './style.css';
 import todoTasks from './modules/taskDB';
-import { addTask, addNewTask, deleteTask, toggleEditMode, toggleViewMode, editTaskDescription, saveToLocalStorage } from './modules/addremove';
+import {
+  addTask,
+  addNewTask,
+  deleteTask,
+  toggleEditMode,
+  saveToLocalStorage,
+} from './modules/addremove';
 
 const listDiv = document.getElementById('list');
 const clearBtn = document.getElementById('clear-completed');
@@ -14,13 +20,12 @@ const buildTask = () => {
   });
   // Get checkboxes after building the tasks
   const checkboxes = document.querySelectorAll('.check-box');
-// Add event listener for the 'change' event on the checkboxes
+  // Add event listener for the 'change' event on the checkboxes
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', (event) => {
+    checkbox.addEventListener('change', () => {
       const index = Number(checkbox.id.split('-')[0]);
       const status = todoTasks[index - 1].completed;
       todoTasks[index - 1].completed = !status;
-      
     });
   });
   saveToLocalStorage();
@@ -40,13 +45,15 @@ clearBtn.addEventListener('click', () => {
 
   if (completedIndexes.length > 0) {
     deleteTask(completedIndexes);
-    buildTask(); // Rebuild the tasks after deleting completed tasks
+    buildTask(); // Rebuild the tasks after
+    // deleting completed tasks
   }
 });
 
-// Add event listener for the 'click' event on the listDiv (for editing task description or deleting)
+// Add event listener for the 'click' event
+// on the listDiv (for editing task description or deleting)
 listDiv.addEventListener('click', (event) => {
-  const target = event.target;
+  const { target } = event;
   const taskElement = target.closest('.single-task');
 
   if (!taskElement) return; // Exit if the clicked element is not a task
