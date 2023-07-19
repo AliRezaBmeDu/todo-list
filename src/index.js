@@ -53,7 +53,7 @@ listDiv.addEventListener('click', (event) => {
 
   const index = Number(taskElement.id.split('-')[1]);
 
-  if (target.classList.contains('dot-icon')) {
+  if (target.classList.contains('dot-icon') || target.classList.contains('delete-icon')) {
     const dataAction = target.getAttribute('data-action');
     if (dataAction === 'edit') {
       toggleEditMode(taskElement, index);
