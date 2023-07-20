@@ -115,7 +115,7 @@ To run the project, execute the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ]**Checkbox function to mark a task completed**
+- [ ]**Drag and Drop feature**
 - [ ]**Clear list functionalities**
 - [ ]**Interactive list**
 

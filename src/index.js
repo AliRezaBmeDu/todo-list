@@ -26,6 +26,7 @@ const buildTask = () => {
       const index = Number(checkbox.id.split('-')[0]);
       const status = todoTasks[index - 1].completed;
       todoTasks[index - 1].completed = !status;
+      saveToLocalStorage();
     });
   });
   saveToLocalStorage();
