@@ -25,8 +25,8 @@ export const addTask = (detail, idx, status) => {
   checkbox.id = `${task.index}-checkbox`;
   checkbox.name = 'checkbox';
   checkbox.className = 'check-box';
-  if(status){
-    checkbox.checked = true
+  if (status) {
+    checkbox.checked = true;
   }
 
   const taskDescription = document.createElement('p');
