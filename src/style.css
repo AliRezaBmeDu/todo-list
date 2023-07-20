@@ -1,0 +1,120 @@
+body {
+  background-color: rgb(218, 213, 213);
+}
+
+/* General styling for all elements */
+.todo-head,
+.input-div,
+.single-task,
+.clear-completed {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+/* General styling for the container */
+#todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 'todo-head' styles */
+.todo-head {
+  flex-direction: row;
+  padding: 0.5rem;
+  width: 50%;
+  margin-top: 5rem;
+}
+
+/* 'todo-head' p element */
+.todo-head p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* 'todo-head' i element */
+.todo-head i {
+  margin-left: auto;
+}
+
+/* 'input-div' styles */
+.input-div {
+  padding: 0.5rem;
+  width: 50%;
+  height: 2rem;
+  margin-top: 0.2rem;
+}
+
+.input-div input {
+  flex-grow: 1;
+  border: none;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Styling for the todo list */
+#list {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  position: relative;
+  left: -1.2rem;
+}
+
+.single-task {
+  display: flex;
+  align-items: center;
+  margin-top: 0.2rem;
+  width: 100%;
+  font-size: 1rem;
+  height: 2.6rem;
+  padding-inline: 8px;
+}
+
+.single-task p {
+  font-size: 1.1rem;
+}
+
+.single-task .edit-input {
+  font-size: 1.1rem;
+  height: 2rem;
+  border: none;
+}
+
+.single-task input[type="checkbox"] {
+  margin-right: 20px;
+  align-self: flex-start;
+  margin-top: 0.7rem;
+}
+
+.single-task .dot-icon,
+.delete-icon {
+  margin-left: auto;
+  align-self: flex-end;
+  height: 0.5rem;
+  position: relative;
+  top: -1rem;
+}
+
+/* 'clear-completed' styles */
+#clear-completed {
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  font-size: 1.1rem;
+  color: gray;
+  background-color: rgb(240, 240, 240);
+  width: 50%;
+  text-align: center;
+  height: 2rem;
+  padding-top: 1rem;
+}
