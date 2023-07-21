@@ -13,6 +13,7 @@
   - [Prerequisites](#prerequisites)
   - [Install](#install)
   - [Usage](#usage)
+  - [Deployment](#deployment)
   - [Run tests](#run-tests)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
@@ -90,6 +91,10 @@ Install this project with:
 To run the project, execute the following command:
 
 > npm install
+
+### Deployment
+
+The page is deployed to [todo-list github page](https://alirezabmedu.github.io/todo-list/)
 
 ### Run tests
 
