@@ -192,3 +192,23 @@ export const clearCompletedTasks = (listDiv) => {
     buildTask(listDiv); // Rebuild the tasks after deleting completed tasks
   }
 };
+
+export const handleTaskClick = (event, listDiv) => {
+  const { target } = event;
+  const taskElement = target.closest('.single-task');
+
+  if (!taskElement) return; // Exit if the clicked element is not a task
+
+  const index = Number(taskElement.id.split('-')[1]);
+
+  if (target.classList.contains('dot-icon') || target.classList.contains('delete-icon')) {
+    const dataAction = target.getAttribute('data-action');
+    if (dataAction === 'edit') {
+      toggleEditMode(taskElement, index);
+    } else if (dataAction === 'delete') {
+      deleteTask([index - 1], listDiv); // Use deleteTask function to remove the task
+    }
+  } else if (target.tagName === 'P') {
+    toggleEditMode(taskElement, index); // Toggle to edit mode when the task description is clicked
+  }
+};
