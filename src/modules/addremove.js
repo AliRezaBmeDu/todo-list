@@ -2,7 +2,7 @@
 
 import todoTasks from './taskDB';
 
-const listDiv = document.getElementById('list');
+// const listDiv = document.getElementById('list');
 // const LOCAL_STORAGE_KEY = 'todoTasks';
 
 export const saveToLocalStorage = () => {
@@ -16,7 +16,7 @@ export const addTask = (detail, idx, status, listDiv) => {
     completed: status,
     index: idx,
   };
-  
+
   const singleTask = document.createElement('li');
   singleTask.className = 'single-task';
   singleTask.id = `${task.description}-${task.index}`;
@@ -36,7 +36,7 @@ export const addTask = (detail, idx, status, listDiv) => {
   singleTask.appendChild(taskDescription);
 
   const threeDotIcon = document.createElement('i');
-  threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');-
+  threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');
   threeDotIcon.classList.add(`${task.index}-threedot`);
   singleTask.appendChild(threeDotIcon);
   listDiv.appendChild(singleTask);
@@ -44,62 +44,82 @@ export const addTask = (detail, idx, status, listDiv) => {
 
 export const addNewTask = (inputField, event, listDiv) => {
   if (event.key === 'Enter' && inputField.value.trim() !== '') {
-    const newTaskDescription = inputField.value;
-    const newIndex = todoTasks.length + 1;
-  }else {
+    // Intentionally left blank
+  } else {
     console.log('event.key check');
-    return
+    return;
   }
-    
-    //--------------------//
-    const detail = inputField.value.trim();
-    const status = false;
-    const idx = todoTasks.length + 1;
-    const task = {
-      description: detail,
-      completed: status,
-      index: idx,
-    };
-    
-    const singleTask = document.createElement('li');
-    singleTask.className = 'single-task';
-    singleTask.id = `${task.description}-${task.index}`;
-  
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.id = `${task.index}-checkbox`;
-    checkbox.name = 'checkbox';
-    checkbox.className = 'check-box';
-    if (status) {
-      checkbox.checked = true;
-    }
-    const taskDescription = document.createElement('p');
-    taskDescription.innerText = task.description;
-  
-    singleTask.appendChild(checkbox);
-    singleTask.appendChild(taskDescription);
-  
-    const threeDotIcon = document.createElement('i');
-    threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');-
-    threeDotIcon.classList.add(`${task.index}-threedot`);
-    singleTask.appendChild(threeDotIcon);
-    listDiv.appendChild(singleTask);
 
-    //--------------------//
-    const newTask = {
-      description: detail,
-      completed: false,
-      index: idx,
-    };
-    todoTasks.push(newTask);
-    inputField.value = '';
+  // --------------------//
+  const detail = inputField.value.trim();
+  const status = false;
+  const idx = todoTasks.length + 1;
+  const task = {
+    description: detail,
+    completed: status,
+    index: idx,
+  };
+
+  const singleTask = document.createElement('li');
+  singleTask.className = 'single-task';
+  singleTask.id = `${task.description}-${task.index}`;
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.id = `${task.index}-checkbox`;
+  checkbox.name = 'checkbox';
+  checkbox.className = 'check-box';
+  if (status) {
+    checkbox.checked = true;
+  }
+  const taskDescription = document.createElement('p');
+  taskDescription.innerText = task.description;
+
+  singleTask.appendChild(checkbox);
+  singleTask.appendChild(taskDescription);
+
+  const threeDotIcon = document.createElement('i');
+  threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');
+  threeDotIcon.classList.add(`${task.index}-threedot`);
+  singleTask.appendChild(threeDotIcon);
+  listDiv.appendChild(singleTask);
+
+  // --------------------//
+  const newTask = {
+    description: detail,
+    completed: false,
+    index: idx,
+  };
+  todoTasks.push(newTask);
+  inputField.value = '';
+  saveToLocalStorage();
+};
+
+// Function to build the tasks on the screen
+export const buildTask = (listDiv) => {
+  listDiv.innerHTML = ''; // Clear existing tasks before building
+  todoTasks.forEach((task) => {
+    addTask(task.description, task.index, task.completed, listDiv);
+  });
+  // Get checkboxes after building the tasks
+  const checkboxes = document.querySelectorAll('.check-box');
+  // Add event listener for the 'change' event on the checkboxes
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      const index = Number(checkbox.id.split('-')[0]);
+      const status = todoTasks[index - 1].completed;
+      todoTasks[index - 1].completed = !status;
+      saveToLocalStorage();
+    });
     saveToLocalStorage();
-}
+  });
+  saveToLocalStorage();
+};
 
 export const deleteTask = (indexes, listDiv) => {
   // Sort indexes in descending order
-  indexes.sort((a, b) => b - a); 
-  
+  indexes.sort((a, b) => b - a);
+
   indexes.forEach((index) => {
     todoTasks.splice(index, 1);
   });
@@ -107,10 +127,9 @@ export const deleteTask = (indexes, listDiv) => {
   for (let i = 0; i < todoTasks.length; i += 1) {
     todoTasks[i].index = i + 1;
   }
-  
+
   saveToLocalStorage();
   buildTask(listDiv);
-  
 };
 
 export const toggleViewMode = (taskElement, index, description) => {
@@ -165,25 +184,4 @@ export const toggleEditMode = (taskElement, index) => {
       toggleViewMode(taskElement, index, newDescription); // Toggle back to view mode
     }
   });
-};
-
-// Function to build the tasks on the screen
-export const buildTask = (listDiv) => {
-  listDiv.innerHTML = ''; // Clear existing tasks before building
-  todoTasks.forEach((task) => {
-    addTask(task.description, task.index, task.completed, listDiv);
-  });
-  // Get checkboxes after building the tasks
-  const checkboxes = document.querySelectorAll('.check-box');
-  // Add event listener for the 'change' event on the checkboxes
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => {
-      const index = Number(checkbox.id.split('-')[0]);
-      const status = todoTasks[index - 1].completed;
-      todoTasks[index - 1].completed = !status;
-      saveToLocalStorage();
-    });
-    saveToLocalStorage();
-  });
-  saveToLocalStorage();
 };

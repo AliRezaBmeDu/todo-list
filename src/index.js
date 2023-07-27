@@ -5,14 +5,11 @@ import {
   addNewTask,
   deleteTask,
   toggleEditMode,
-  saveToLocalStorage,
 } from './modules/addremove';
 
 const listDiv = document.getElementById('list');
 const clearBtn = document.getElementById('clear-completed');
 const inputField = document.getElementById('newtask');
-
-
 
 // Add event listener for the 'keydown' event on the input field
 inputField.addEventListener('keydown', (event) => {
@@ -28,7 +25,7 @@ clearBtn.addEventListener('click', () => {
 
   if (completedIndexes.length > 0) {
     deleteTask(completedIndexes, listDiv);
-    //buildTask(listDiv); // Rebuild the tasks after
+    // buildTask(listDiv); // Rebuild the tasks after
     // deleting completed tasks
   }
 });
@@ -49,7 +46,7 @@ listDiv.addEventListener('click', (event) => {
       toggleEditMode(taskElement, index);
     } else if (dataAction === 'delete') {
       deleteTask([index - 1], listDiv); // Use deleteTask function to remove the task
-      //buildTask(listDiv); // Rebuild the tasks after deleting
+      // buildTask(listDiv); // Rebuild the tasks after deleting
     }
   } else if (target.tagName === 'P') {
     toggleEditMode(taskElement, index); // Toggle to edit mode when the task description is clicked
