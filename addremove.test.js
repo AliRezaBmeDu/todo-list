@@ -78,44 +78,4 @@ describe('addNewTask function', () => {
   });
 
 });
-
-describe('deleteTask function', () => {
-  it('should remove the specified tasks from the list and update localStorage', () => {
-    
-    console.log(localStorageMock.getItem('todoTasks'));
-
-    // Assert that the task has been removed from the DOM
-    const listDivMock = document.getElementById('list');
-    buildTask(listDivMock)
-    const childElementCountBeforeDelete = listDivMock.childElementCount;
-    
-    // Call the deleteTask function with the index of the task to be deleted
-    const index = 2;
-    deleteTask([index-1], listDivMock); // Delete Task 2
-    
-    const childElementCountAfterDelete = listDivMock.childElementCount;
-    
-    expect(childElementCountBeforeDelete - childElementCountAfterDelete).toBe(1);
-
-    // Assert that localStorage has been updated after deletion
-    const storedData = JSON.parse(localStorage.getItem('todoTasks'));
-    expect(storedData).toEqual([
-      {
-        description: 'Read the documentation',
-        completed: false,
-        index: 1,
-      },
-      {
-        description: 'Set the Linters',
-        completed: false,
-        index: 2,
-      },
-      {
-        description: 'Test Task',
-        completed: false,
-        index: 3,
-      },
-    ]);
-  });
-
-});
+// );

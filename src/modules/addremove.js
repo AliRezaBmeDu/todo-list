@@ -96,36 +96,20 @@ export const addNewTask = (inputField, event, listDiv) => {
     saveToLocalStorage();
 }
 
-export const deleteTask = (indexes, listDiv, localStorageMock=null, mockData=null) => {
+export const deleteTask = (indexes, listDiv) => {
   // Sort indexes in descending order
   indexes.sort((a, b) => b - a); 
   
-  if(mockData){
-    indexes.forEach((index) => {
-    mockData.splice(index, 1);
-    console.log('MockDATA: ' + mockData);
-    for (let i = 0; i < mockData.length; i += 1) {
-      mockData[i].index = i + 1;
-    }
+  indexes.forEach((index) => {
+    todoTasks.splice(index, 1);
   });
-  }else{
-    indexes.forEach((index) => {
-      todoTasks.splice(index, 1);
-    });
-    // Update indexes of remaining tasks
-    for (let i = 0; i < todoTasks.length; i += 1) {
-      todoTasks[i].index = i + 1;
-    }
+  // Update indexes of remaining tasks
+  for (let i = 0; i < todoTasks.length; i += 1) {
+    todoTasks[i].index = i + 1;
   }
-  if(localStorageMock){
-    localStorageMock.setItem('todotasks', JSON.stringify(mockData));
-    console.log('mockData: ' + mockData.length)
-    console.log(localStorageMock.getItem('todoTasks'))
-    return mockData
-  }else{
-    saveToLocalStorage();
-  }
-buildTask(listDiv)
+  
+  saveToLocalStorage();
+  buildTask(listDiv);
   
 };
 
