@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --testPattern='*.test.js'",
+    "test": "jest --testEnvironment jsdom --testPattern='*.test.js'",
     "start": "webpack serve --open",
     "build": "webpack"
   },
@@ -21,6 +21,7 @@
     "hint": "^7.1.10",
     "html-webpack-plugin": "^5.5.3",
     "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1",
     "style-loader": "^3.3.3",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",

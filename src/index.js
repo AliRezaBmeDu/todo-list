@@ -16,7 +16,7 @@ const inputField = document.getElementById('newtask');
 const buildTask = () => {
   listDiv.innerHTML = ''; // Clear existing tasks before building
   todoTasks.forEach((task) => {
-    addTask(task.description, task.index, task.completed);
+    addTask(task.description, task.index, task.completed, listDiv);
   });
   // Get checkboxes after building the tasks
   const checkboxes = document.querySelectorAll('.check-box');
@@ -34,7 +34,7 @@ const buildTask = () => {
 
 // Add event listener for the 'keydown' event on the input field
 inputField.addEventListener('keydown', (event) => {
-  addNewTask(inputField, event);
+  addNewTask(inputField, event, listDiv);
 });
 
 // Add event listener for the 'click' event on the clearBtn

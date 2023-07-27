@@ -3,20 +3,22 @@
 import todoTasks from './taskDB';
 
 const listDiv = document.getElementById('list');
-const LOCAL_STORAGE_KEY = 'todoTasks';
+// const LOCAL_STORAGE_KEY = 'todoTasks';
 
 export const saveToLocalStorage = () => {
+  const LOCAL_STORAGE_KEY = 'todoTasks';
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoTasks));
 };
 
-export const addTask = (detail, idx, status) => {
+export const addTask = (detail, idx, status, listDiv) => {
   const task = {
     description: detail,
     completed: status,
     index: idx,
   };
-
+  
   const singleTask = document.createElement('li');
+  console.log('Is singleTask visible? '+ `${singleTask}`)
   singleTask.className = 'single-task';
   singleTask.id = `${task.description}-${task.index}`;
 
@@ -28,7 +30,7 @@ export const addTask = (detail, idx, status) => {
   if (status) {
     checkbox.checked = true;
   }
-
+ console.log('is listDiv real?  '+ `${listDiv}`);
   const taskDescription = document.createElement('p');
   taskDescription.innerText = task.description;
 
@@ -36,28 +38,70 @@ export const addTask = (detail, idx, status) => {
   singleTask.appendChild(taskDescription);
 
   const threeDotIcon = document.createElement('i');
-  threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');
+  threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');-
   threeDotIcon.classList.add(`${task.index}-threedot`);
   singleTask.appendChild(threeDotIcon);
   listDiv.appendChild(singleTask);
 };
 
-export const addNewTask = (inputField, event) => {
+export const addNewTask = (inputField, event, listDiv) => {
   if (event.key === 'Enter' && inputField.value.trim() !== '') {
-    const newTaskDescription = inputField.value.trim();
+    const newTaskDescription = inputField.value;
     const newIndex = todoTasks.length + 1;
+    console.log(newIndex);
+    console.log('newTaskDescription: '+ newTaskDescription);
+  }else {
+    console.log('event.key check');
+    return
+  }
+    // addTask(newTaskDescription, newIndex, false, listDiv);
+    
+    //--------------------//
+    const detail = inputField.value.trim();
+    const status = false;
+    const idx = todoTasks.length + 1;
+    const task = {
+      description: detail,
+      completed: status,
+      index: idx,
+    };
+    
+    const singleTask = document.createElement('li');
+    console.log('Is singleTask visible? '+ `${singleTask}`)
+    singleTask.className = 'single-task';
+    singleTask.id = `${task.description}-${task.index}`;
+  
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `${task.index}-checkbox`;
+    checkbox.name = 'checkbox';
+    checkbox.className = 'check-box';
+    if (status) {
+      checkbox.checked = true;
+    }
+   console.log('is listDiv real?  '+ `${listDiv}`);
+    const taskDescription = document.createElement('p');
+    taskDescription.innerText = task.description;
+  
+    singleTask.appendChild(checkbox);
+    singleTask.appendChild(taskDescription);
+  
+    const threeDotIcon = document.createElement('i');
+    threeDotIcon.classList.add('fas', 'fa-ellipsis-v', 'dot-icon');-
+    threeDotIcon.classList.add(`${task.index}-threedot`);
+    singleTask.appendChild(threeDotIcon);
+    listDiv.appendChild(singleTask);
 
-    addTask(newTaskDescription, newIndex, false);
+    //--------------------//
     const newTask = {
-      description: newTaskDescription,
+      description: detail,
       completed: false,
-      index: newIndex,
+      index: idx,
     };
     todoTasks.push(newTask);
     inputField.value = '';
     saveToLocalStorage();
-  }
-};
+}
 
 export const deleteTask = (indexes) => {
   indexes.sort((a, b) => b - a); // Sort indexes in descending order
