@@ -1,9 +1,4 @@
-// addremove.js
-
 import todoTasks from './taskDB';
-
-// const listDiv = document.getElementById('list');
-// const LOCAL_STORAGE_KEY = 'todoTasks';
 
 export const saveToLocalStorage = () => {
   const LOCAL_STORAGE_KEY = 'todoTasks';
