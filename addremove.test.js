@@ -1,4 +1,5 @@
-import { addTask, addNewTask, deleteTask } from './src/modules/addremove'; // Import the functions to be tested
+import { buildTask, addTask, addNewTask, deleteTask } from './src/modules/addremove'; // Import the functions to be tested
+import todoTasks from './src/modules/taskDB';
 
 // Mocking localStorage for testing
 const localStorageMock = (() => {
@@ -76,7 +77,6 @@ describe('addNewTask function', () => {
     );
   });
 
-  // Add more tests for the addNewTask function if needed
 });
 
 describe('deleteTask function', () => {
@@ -87,17 +87,19 @@ describe('deleteTask function', () => {
       { description: 'Task 2', index: 2, completed: true },
       { description: 'Task 3', index: 3, completed: false },
     ];
-    localStorage.setItem('todoTasks', JSON.stringify(initialData));
+    localStorageMock.setItem('todoTasks', JSON.stringify(initialData));
+    console.log(localStorageMock.getItem('todoTasks'));
 
     // Call the deleteTask function with the index of the task to be deleted
-    deleteTask([2]); // Delete Task 2
-
+    const index = 2;
+    deleteTask([index-1], localStorageMock, initialData); // Delete Task 2
+    console.log(localStorageMock.getItem('todoTasks'));
     // Assert that the task has been removed from the DOM
     const listDivMock = document.getElementById('list');
     expect(listDivMock.childElementCount).toBe(2);
 
     // Assert that localStorage has been updated after deletion
-    const storedData = JSON.parse(localStorage.getItem('todoTasks'));
+    const storedData = JSON.parse(localStorageMock.getItem('todoTasks'));
     expect(storedData).toEqual([
       { description: 'Task 1', index: 1, completed: false },
       { description: 'Task 3', index: 2, completed: false },

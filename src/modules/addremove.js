@@ -103,18 +103,26 @@ export const addNewTask = (inputField, event, listDiv) => {
     saveToLocalStorage();
 }
 
-export const deleteTask = (indexes) => {
+export const deleteTask = (indexes, localStorageMock, todoTasks) => {
   indexes.sort((a, b) => b - a); // Sort indexes in descending order
   indexes.forEach((index) => {
     todoTasks.splice(index, 1);
   });
+  console.log(todoTasks);
+
+  console.log(localStorageMock.getItem('todoTasks'))
 
   // Update indexes of remaining tasks
   for (let i = 0; i < todoTasks.length; i += 1) {
     todoTasks[i].index = i + 1;
   }
 
-  saveToLocalStorage();
+  if(localStorageMock){
+    return todoTasks;
+  }else{
+    saveToLocalStorage();
+  }
+  
 };
 
 export const toggleViewMode = (taskElement, index, description) => {
@@ -169,4 +177,24 @@ export const toggleEditMode = (taskElement, index) => {
       toggleViewMode(taskElement, index, newDescription); // Toggle back to view mode
     }
   });
+};
+
+// Function to build the tasks on the screen
+export const buildTask = (listDiv) => {
+  listDiv.innerHTML = ''; // Clear existing tasks before building
+  todoTasks.forEach((task) => {
+    addTask(task.description, task.index, task.completed, listDiv);
+  });
+  // Get checkboxes after building the tasks
+  const checkboxes = document.querySelectorAll('.check-box');
+  // Add event listener for the 'change' event on the checkboxes
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      const index = Number(checkbox.id.split('-')[0]);
+      const status = todoTasks[index - 1].completed;
+      todoTasks[index - 1].completed = !status;
+      saveToLocalStorage();
+    });
+  });
+  saveToLocalStorage();
 };
