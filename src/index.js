@@ -27,8 +27,8 @@ clearBtn.addEventListener('click', () => {
   }, []);
 
   if (completedIndexes.length > 0) {
-    deleteTask(completedIndexes);
-    buildTask(listDiv); // Rebuild the tasks after
+    deleteTask(completedIndexes, listDiv);
+    //buildTask(listDiv); // Rebuild the tasks after
     // deleting completed tasks
   }
 });
@@ -48,8 +48,8 @@ listDiv.addEventListener('click', (event) => {
     if (dataAction === 'edit') {
       toggleEditMode(taskElement, index);
     } else if (dataAction === 'delete') {
-      deleteTask([index - 1]); // Use deleteTask function to remove the task
-      buildTask(listDiv); // Rebuild the tasks after deleting
+      deleteTask([index - 1], listDiv); // Use deleteTask function to remove the task
+      //buildTask(listDiv); // Rebuild the tasks after deleting
     }
   } else if (target.tagName === 'P') {
     toggleEditMode(taskElement, index); // Toggle to edit mode when the task description is clicked
