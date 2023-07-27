@@ -1,7 +1,6 @@
 import {
   buildTask, addTask, addNewTask, deleteTask,
 } from './src/modules/addremove'; // Import the functions to be tested
-// import todoTasks from './src/modules/taskDB';
 
 // Mocking localStorage for testing
 const localStorageMock = (() => {
@@ -73,8 +72,8 @@ describe('Task functions', () => {
       }),
     );
   });
-  
-// Test for deleteTask//
+
+  // Test for deleteTask//
   it('should remove the specified tasks from the list and update localStorage', () => {
     console.log(localStorageMock.getItem('todoTasks'));
     // Assert that the task has been removed from the DOM
