@@ -180,3 +180,15 @@ export const toggleEditMode = (taskElement, index) => {
     }
   });
 };
+
+export const clearCompletedTasks = (listDiv) => {
+  const completedIndexes = todoTasks.reduce((indexes, task, index) => {
+    if (task.completed) indexes.push(index);
+    return indexes;
+  }, []);
+
+  if (completedIndexes.length > 0) {
+    deleteTask(completedIndexes, listDiv);
+    buildTask(listDiv); // Rebuild the tasks after deleting completed tasks
+  }
+};
