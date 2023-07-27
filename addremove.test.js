@@ -25,7 +25,7 @@ Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 // Mock getElementById method to provide a fake listDiv element
 jest.spyOn(document, 'getElementById').mockReturnValue(document.createElement('ul'));
 
-describe('addTask function', () => {
+describe('Task functions', () => {
   it('should add a new task to the DOM', () => {
     // Create a mock listDiv element
     const listDivMock = document.createElement('ul');
@@ -46,10 +46,6 @@ describe('addTask function', () => {
     expect(appendChildSpy).toHaveBeenCalledWith(expect.any(HTMLLIElement));
   });
 
-  // Add more tests for the addTask function if needed
-});
-
-describe('addNewTask function', () => {
   it('should add a new task to the listDiv and update localStorage', () => {
     const mockListDiv = document.getElementById('list');
     // Create a mock input field and set its value
@@ -77,9 +73,8 @@ describe('addNewTask function', () => {
       }),
     );
   });
-});
+  
 // Test for deleteTask//
-describe('deleteTask function', () => {
   it('should remove the specified tasks from the list and update localStorage', () => {
     console.log(localStorageMock.getItem('todoTasks'));
     // Assert that the task has been removed from the DOM
