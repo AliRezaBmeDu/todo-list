@@ -88,6 +88,7 @@ describe('deleteTask function', () => {
     const listDivMock = document.getElementById('list');
     buildTask(listDivMock)
     const childElementCountBeforeDelete = listDivMock.childElementCount;
+    
     // Call the deleteTask function with the index of the task to be deleted
     const index = 2;
     deleteTask([index-1], listDivMock); // Delete Task 2

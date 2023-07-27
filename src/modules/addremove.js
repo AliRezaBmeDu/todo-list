@@ -199,6 +199,7 @@ export const buildTask = (listDiv) => {
       todoTasks[index - 1].completed = !status;
       saveToLocalStorage();
     });
+    saveToLocalStorage();
   });
   saveToLocalStorage();
 };
