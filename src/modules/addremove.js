@@ -25,7 +25,8 @@ export const addTask = (detail, idx, status, listDiv) => {
     checkbox.checked = true;
   }
   const taskDescription = document.createElement('p');
-  taskDescription.innerText = task.description;
+  console.log(detail);
+  taskDescription.innerHTML = detail;
 
   singleTask.appendChild(checkbox);
   singleTask.appendChild(taskDescription);
@@ -90,9 +91,16 @@ export const addNewTask = (inputField, event, listDiv) => {
   saveToLocalStorage();
 };
 
+export const updateTaskStatus = (index) => {
+  const status = todoTasks[index - 1].completed;
+  todoTasks[index - 1].completed = !status;
+  saveToLocalStorage();
+};
+
 // Function to build the tasks on the screen
 export const buildTask = (listDiv) => {
   listDiv.innerHTML = ''; // Clear existing tasks before building
+  console.log(todoTasks)
   todoTasks.forEach((task) => {
     addTask(task.description, task.index, task.completed, listDiv);
   });
@@ -102,9 +110,7 @@ export const buildTask = (listDiv) => {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
       const index = Number(checkbox.id.split('-')[0]);
-      const status = todoTasks[index - 1].completed;
-      todoTasks[index - 1].completed = !status;
-      saveToLocalStorage();
+      updateTaskStatus(index);
     });
     saveToLocalStorage();
   });

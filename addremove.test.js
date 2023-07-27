@@ -1,5 +1,7 @@
 import {
-  buildTask, addTask, addNewTask, deleteTask,
+  buildTask, addTask, addNewTask, deleteTask, editTaskDescription,
+  updateTaskStatus,
+  clearCompletedTasks
 } from './src/modules/addremove'; // Import the functions to be tested
 
 // Mocking localStorage for testing
@@ -105,3 +107,46 @@ describe('Task functions', () => {
     ]);
   });
 });
+
+describe('edit-complete', () => {
+  it('should edit the current description', () => {
+    const listDivMock = document.getElementById('list');
+    const newDescription = "Updated description";
+    const index = 2;
+    editTaskDescription(index, newDescription);
+    buildTask(listDivMock);
+    const kthLiElement = listDivMock.children[index - 1];
+    const pElement = kthLiElement.querySelector('p');
+    expect(pElement.innerHTML).toBe(newDescription);
+  });
+  
+  it('should update the status of specific indexes', () => {
+    const listDivMock = document.getElementById('list');
+    const indexes = [1,,2];
+    const statusBeforeUpdate = [];
+    const statusAfterUpdate = [];
+
+    buildTask(listDivMock); //build before status update
+
+    indexes.forEach((index) =>{
+      var kthLiElement = listDivMock.children[index - 1];
+      var bool = kthLiElement.querySelector('input').checked;
+      statusBeforeUpdate.push(bool)
+      updateTaskStatus(index); //updating status
+    })
+
+    buildTask(listDivMock); //rebuild after status update
+
+    indexes.forEach((index) =>{
+      var kthLiElement = listDivMock.children[index - 1];
+      var bool = kthLiElement.querySelector('input').checked;
+      statusAfterUpdate.push(bool)
+      updateTaskStatus(index); //reset to the basic version
+    })
+    
+    expect(statusBeforeUpdate).toEqual([false, false]);
+    expect(statusAfterUpdate).toEqual([true, true]);
+  });
+
+  
+})
