@@ -1,3 +1,4 @@
+// This is a demo database for todo list
 const todoTasks = [
   {
     description: 'Read the documentation',
