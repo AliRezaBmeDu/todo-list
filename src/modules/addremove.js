@@ -25,7 +25,6 @@ export const addTask = (detail, idx, status, listDiv) => {
     checkbox.checked = true;
   }
   const taskDescription = document.createElement('p');
-  console.log(detail);
   taskDescription.innerHTML = detail;
 
   singleTask.appendChild(checkbox);
@@ -100,7 +99,6 @@ export const updateTaskStatus = (index) => {
 // Function to build the tasks on the screen
 export const buildTask = (listDiv) => {
   listDiv.innerHTML = ''; // Clear existing tasks before building
-  console.log(todoTasks)
   todoTasks.forEach((task) => {
     addTask(task.description, task.index, task.completed, listDiv);
   });
