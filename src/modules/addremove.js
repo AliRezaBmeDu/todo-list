@@ -100,7 +100,7 @@ export const updateTaskStatus = (index) => {
 // Function to build the tasks on the screen
 export const buildTask = (listDiv) => {
   listDiv.innerHTML = ''; // Clear existing tasks before building
-  console.log(todoTasks)
+  console.log(todoTasks);
   todoTasks.forEach((task) => {
     addTask(task.description, task.index, task.completed, listDiv);
   });
