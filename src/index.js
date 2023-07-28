@@ -4,7 +4,7 @@ import {
   buildTask,
   addNewTask,
   handleTaskClick,
-  clearCompletedTasks,
+  clearCompletedTasks
 } from './modules/addremove';
 
 const listDiv = document.getElementById('list');
@@ -18,7 +18,7 @@ inputField.addEventListener('keydown', (event) => {
 
 // Add event listener for the 'click' event on the clearBtn
 clearBtn.addEventListener('click', () => {
-  clearCompletedTasks(listDiv); // Call the clearCompletedTasks function
+  clearCompletedTasks(listDiv); // Call the clearCompletedTasks function to handle clearing completed tasks
 });
 
 // Add event listener for the 'click' event

@@ -1,5 +1,9 @@
 import {
-  buildTask, addTask, addNewTask, deleteTask, editTaskDescription,
+  buildTask,
+  addTask,
+  addNewTask,
+  deleteTask,
+  editTaskDescription,
   updateTaskStatus,
   clearCompletedTasks,
 } from './src/modules/addremove'; // Import the functions to be tested
@@ -107,6 +111,7 @@ describe('Task functions: add and delete', () => {
   });
 });
 
+
 describe('Task functions: edit and clear-complete', () => {
   it('should edit the current description', () => {
     const listDivMock = document.getElementById('list');
@@ -146,7 +151,6 @@ describe('Task functions: edit and clear-complete', () => {
     expect(statusBeforeUpdate).toEqual([false, false]);
     expect(statusAfterUpdate).toEqual([true, true]);
   });
-
   it('should clear all completed tasks', () => {
     const listDivMock = document.getElementById('list');
     const indexes = [1, 2];
@@ -169,5 +173,11 @@ describe('Task functions: edit and clear-complete', () => {
     expect(storedData).toEqual([
       { description: 'Test Task', completed: false, index: 1 },
     ]);
+
+    indexes.forEach((index) => {
+      updateTaskStatus(index); // updating status to be completed=true.
+    });
+    clearCompletedTasks(listDivMock);
+
   });
 });
